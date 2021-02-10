@@ -15196,6 +15196,10 @@ void VmaAllocator_T::GetBufferMemoryRequirements(
         requiresDedicatedAllocation = false;
         prefersDedicatedAllocation  = false;
     }
+#if TARGET_OS_SIMULATOR
+    // See: https://github.com/KhronosGroup/MoltenVK/issues/1250
+    memReq.alignment = 256;
+#endif
 }
 
 void VmaAllocator_T::GetImageMemoryRequirements(
